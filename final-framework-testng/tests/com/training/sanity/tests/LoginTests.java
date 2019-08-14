@@ -1,5 +1,7 @@
 package com.training.sanity.tests;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -22,6 +24,7 @@ public class LoginTests {
 	private LoginPOM loginPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException {
@@ -47,9 +50,13 @@ public class LoginTests {
 	}
 	@Test
 	public void validLoginTest() {
-		loginPOM.sendUserName("admin");
-		loginPOM.sendPassword("admin@123");
+		loginPOM.sendUserName("poornisab");
+		loginPOM.sendPassword("Baskar@1");
 		loginPOM.clickLoginBtn(); 
-		screenShot.captureScreenShot("First");
+		String expected = loginPOM.contentmessage();
+		assertEquals("Poornima Sabari",expected);
+	System.out.println("text is displayed");
+		
+		screenShot.captureScreenShot("second");
 	}
 }

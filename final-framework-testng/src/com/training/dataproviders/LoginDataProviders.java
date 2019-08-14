@@ -22,6 +22,10 @@ public class LoginDataProviders {
 			Object[]  obj = new Object[2]; 
 			obj[0] = temp.getUserName(); 
 			obj[1] = temp.getPassword(); 
+			//obj[2] = temp.getfirstname();
+			//obj[3] = temp.getlastname();
+			
+			
 			
 			result[count ++] = obj; 
 		}
@@ -32,13 +36,14 @@ public class LoginDataProviders {
 	
 	@DataProvider(name = "excel-inputs")
 	public Object[][] getExcelData(){
-		String fileName ="C:/Users/Naveen/Desktop/Testing.xlsx"; 
-		return new ApachePOIExcelRead().getExcelContent(fileName); 
+		String fileName ="C:\\Poornima\\Selenium\\Batch.xlsx"; 
+		String sheetname = "Sheet1";
+		return new ApachePOIExcelRead().getExcelContent(fileName, sheetname); 
 	}
 	
 	@DataProvider(name = "xls-inputs")
 	public Object[][] getXLSData(){
 		// ensure you will have the title as first line in the file 
-		return new ReadExcel().getExcelData("C:/Users/Naveen/Desktop/Testing.xls", "Sheet1"); 
+		return new ReadExcel().getExcelData("C:\\Poornima\\Selenium\\Batch.xlsx", "Sheet1"); 
 	}
 }

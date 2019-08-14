@@ -15,6 +15,7 @@ import com.training.bean.LoginBean;
 import com.training.dao.ELearningDAO;
 import com.training.dataproviders.LoginDataProviders;
 import com.training.generics.ScreenShot;
+import com.training.pom.AdminPOM;
 import com.training.pom.LoginPOM;
 import com.training.utility.DriverFactory;
 import com.training.utility.DriverNames;
@@ -23,6 +24,7 @@ public class LoginExcelTest {
 	private WebDriver driver;
 	private String baseUrl;
 	private LoginPOM loginPOM;
+	private AdminPOM adminPOM;
 	private static Properties properties;
 	private ScreenShot screenShot;
 
@@ -37,6 +39,7 @@ public class LoginExcelTest {
 	public void setUp() throws Exception {
 		driver = DriverFactory.getDriver(DriverNames.CHROME);
 		loginPOM = new LoginPOM(driver);
+		adminPOM = new AdminPOM(driver);
 		baseUrl = properties.getProperty("baseURL");
 		screenShot = new ScreenShot(driver);
 		// open the browser
@@ -49,10 +52,16 @@ public class LoginExcelTest {
 	}
 
 	@Test(dataProvider = "excel-inputs", dataProviderClass = LoginDataProviders.class)
-	public void loginDBTest(String userName, String password) {
+	public void loginDBTest(String userName, String password, String firstname, String lastname) throws InterruptedException {
 		loginPOM.sendUserName(userName);
 		loginPOM.sendPassword(password);
 		loginPOM.clickLoginBtn();
+		adminPOM.adminselect();
+		adminPOM.Adduser();
+		adminPOM.fstnameenter(firstname);
+		adminPOM.lstnameenter(lastname);
+		
+		Thread.sleep(5000);
 		screenShot.captureScreenShot(userName);
 
 	}
